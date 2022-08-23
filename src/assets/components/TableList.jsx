@@ -76,22 +76,22 @@ const TableList = () => {
            )}
           </table>
        </div>
-        <div>
-              <Modal isOpen={modal}>
-  <ModalBody>
-                  <div className="form-group">
-                    <label htmlFor="id">ID</label>
-                    <input className="form-control" type="text" name="id" id="id"/>
-                    <br />
-                    <label htmlFor="nombre">TITLE</label>
-                    <input className="form-control" type="text" name="title" id="title" />
-                    <br />
-                    <label htmlFor="nombre">BODY</label>
-                    <input className="form-control" type="text" name="body" id="body" />
-                  </div>
-                </ModalBody>
-              </Modal>
-        </div>
+      <div>
+        <Modal isOpen={modal}>
+          <ModalBody>
+            <div className="form-group">
+              <label htmlFor="id">ID</label>
+              <input className="form-control" type="text" name="id" id="id"/>
+              <br />
+              <label htmlFor="nombre">TITLE</label>
+              <input className="form-control" type="text" name="title" id="title" />
+              <br />
+              <label htmlFor="nombre">BODY</label>
+              <input className="form-control" type="text" name="body" id="body" />
+            </div>
+          </ModalBody>
+        </Modal>
+      </div>
     </div>
   )
 }
