@@ -1,20 +1,31 @@
+
 import React, { useEffect, useState } from 'react'
 import  "../style/TableList.css"
 import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import { Modal, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 
 const TableList = () => {
 
    const [posts, setPosts] = useState([])
    const [modal, setModal] = useState(false)
+   const [form, setform] = useState({id: Number(), title: "", body: ""})
 
    const api = axios.create({
      baseURL:'https://jsonplaceholder.typicode.com'
     });
+
+
+    const openModal = () => {
+          setModal(true)
+        }
+    
+    const closeModal= () => {
+      setModal(false)
+    }
     
     const listPost = async () =>{
       const {data} = await api.get("/posts")
@@ -23,11 +34,34 @@ const TableList = () => {
     }
     
     
-    // const selectPost = (post) => {
-    //    const data = {...post}
+    const handleAddForm = (e) => {
+      e.preventDefault()
+       let name = e.target.name
+       let value = e.target.value
+       const newFormDate = {...form}
+        newFormDate[name] = value 
+        setform(newFormDate)
+        console.log('form', form)
+    }
 
-    //  console.log('data', data)
+    // const add = () =>{
+    //  let newValue = {...form}
+    //  let list = posts
+    //  list.unshift(newValue)
+    //  closeModal()
+    //  setPosts(list)
     // }
+
+    const addPosts = async () =>{
+      await api.post("/posts",form)
+      .then(response=>{
+        setPosts(posts.concat(response.data) )
+        closeModal()
+    }).catch(error=>{
+          console.log(error.status);
+        })
+
+    }
 
     const postDelete = async (post) => {
        await api.delete(`/posts/${post.id}`)
@@ -37,13 +71,6 @@ const TableList = () => {
       // setOpenModal(false)
       console.log('posts', posts)
     }
-
-    
-    const openModal = () => {
-      setModal(true)
-      console.log(modal)
-    }
-
     useEffect(() => {
         listPost()
     },[])
@@ -81,15 +108,19 @@ const TableList = () => {
           <ModalBody>
             <div className="form-group">
               <label htmlFor="id">ID</label>
-              <input className="form-control" type="text" name="id" id="id"/>
+              <input className="form-control" type="number" name="id" id="id" onChange={handleAddForm}/>
               <br />
               <label htmlFor="nombre">TITLE</label>
-              <input className="form-control" type="text" name="title" id="title" />
+              <input className="form-control" type="text" name="title" id="title" onChange={handleAddForm} />
               <br />
               <label htmlFor="nombre">BODY</label>
-              <input className="form-control" type="text" name="body" id="body" />
+              <input className="form-control" type="text" name="body" id="body" onChange={handleAddForm} />
             </div>
           </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={()=>addPosts()}>agregar</Button>
+            <Button color="secondary" onClick={closeModal} >Cancel</Button>
+          </ModalFooter>
         </Modal>
       </div>
     </div>
