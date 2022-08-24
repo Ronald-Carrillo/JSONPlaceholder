@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from 'react'
-import  "../style/TableList.css"
 import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,7 +11,7 @@ const TableList = () => {
 
    const [posts, setPosts] = useState([])
    const [modal, setModal] = useState(false)
-   const [form, setform] = useState({id: Number(), title: "", body: ""})
+   const [form, setform] = useState({id:"", title: "", body: ""})
 
    const api = axios.create({
      baseURL:'https://jsonplaceholder.typicode.com'
