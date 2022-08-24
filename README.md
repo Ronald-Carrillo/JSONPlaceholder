@@ -34,7 +34,9 @@ You don’t have to ever use eject. The curated feature set is suitable for smal
   **Contiene**
 ***
  *consumo de una API REST 
+
  *listado de posts 
+
  *peticiones get posts y delete 
 
  **construido con**
@@ -42,6 +44,13 @@ You don’t have to ever use eject. The curated feature set is suitable for smal
 
  ReactJs con Javascript y bootstrap
 
- 
- 
+
+ **Despliegue**
+ ***
+
+ Desplegado con netlify
+
+ [LINK](https://tableinformation.netlify.app/)
+
+
  
